@@ -6,12 +6,12 @@ const port = 3000;
 const UserRegistration=require('./routes/UserRegistration');
 const UserLogin=require('./routes/UserLogin');
 const UserPreferences=require('./routes/UserPreferences');
+const FetchingNews=require('./routes/FetchingNews');
 require('dotenv').config()
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//verify jwttoken
 
 mongoose.connect(process.env.MONGO_URL).then(()=>{
     console.log("Connected To MongoDb");
@@ -26,6 +26,6 @@ mongoose.connect(process.env.MONGO_URL).then(()=>{
 app.use('/registerUser',UserRegistration);
 app.use('/userLogin',UserLogin);
 app.use('/preferences',UserPreferences);
-
+app.use('/news',FetchingNews);
 
 module.exports = app;
