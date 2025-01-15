@@ -16,7 +16,7 @@ const {username,password,email,preferences}=req.body;
 
 
 if (typeof username !== 'string' || username.length === 0 ||
-    typeof password !== 'string' || password.length === 0) {
+    typeof password !== 'string' || password.length === 0 || password.length <= 5)  {
   return res.status(400).json("Incorrect datatypes are passed");
 }
 
