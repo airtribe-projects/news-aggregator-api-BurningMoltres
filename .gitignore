@@ -1,2 +1,4 @@
+# news-aggregator-api-BurningMoltres/.gitignore
 node_modules
 .tap
+.env
