@@ -14,7 +14,7 @@ let redisClient;
 (async () => {
   redisClient = redis.createClient();
   redisClient.on("error", (error) => {
-  console.log(error);
+  return error;
   });
   await redisClient.connect();
 })();
@@ -22,7 +22,6 @@ let redisClient;
 //middleware function to verify jwt
 const verifyJWT = (req, res, next) => {
   const token = req.headers["authorization"];
-  console.log(token);
   if (token) {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     req.email = decodedToken;
@@ -40,7 +39,6 @@ router.get("/", async (req, res, next) => {
   let email = req.email.email;
   const userId = await User.findOne({ email });
   const preferences = userId.preferences;
-  console.log(preferences);
 
   //check if data is already cached
   const cachedData = await redisClient.get("calculatedData");
@@ -65,7 +63,6 @@ router.get("/", async (req, res, next) => {
       "EX",
       3600
     );
-    console.log(allArticles);
     res.status(200).json(allArticles);
   } catch (error) {
     console.error(error);

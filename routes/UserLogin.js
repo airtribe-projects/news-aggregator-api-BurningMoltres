@@ -7,7 +7,6 @@ const saltRounds = 10;
 const jwt=require("jsonwebtoken");
 
 router.post("/", async (req, res, next) => {
-  console.log(req.body);
   const { username, password, email , preferences } = req.body;
   if (
     typeof username !== "string" ||

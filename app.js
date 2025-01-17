@@ -14,12 +14,12 @@ app.use(express.urlencoded({ extended: true }));
 
 
 mongoose.connect(process.env.MONGO_URL).then(()=>{
-    console.log("Connected To MongoDb");
+    
     app.listen(port, (err) => {
         if (err) {
-            return console.log('Something bad happened', err);
+            return err;
         }
-        console.log(`Server is listening on ${port}`);
+        
     });
 })
 

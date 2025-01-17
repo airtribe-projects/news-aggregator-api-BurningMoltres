@@ -7,7 +7,6 @@ const saltRounds=10;
 
 
 router.post('/',async (req,res,next)=>{
-console.log(req.body);
 const {username,password,email,preferences}=req.body;
 
 //check datatype of username and password 

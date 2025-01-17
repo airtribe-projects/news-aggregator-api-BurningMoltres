@@ -9,7 +9,6 @@ require("dotenv").config();
 //middleware function to verify jwt
 const verifyJWT = (req, res, next) => {
   const token = req.headers["authorization"];
-  console.log(token);
   if (token) {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     req.email = decodedToken;
@@ -41,13 +40,11 @@ router.put("/", async(req, res, next) => {
     try {
         let email = req.email.email;
         let updatedPreferences=req.body.preferences;
-        console.log(typeof updatedPreferences);
         const userId = await User.findOne({ email });
         if (userId.preferences.length <= 0 || updatedPreferences.length < 0 ) {
           return res.status(404).json("Operation could not be performed");
         }
          await User.findOneAndUpdate({email:email},{preferences:updatedPreferences},{new:true}) 
-        console.log(updatedPreferences);
         res.status(400).json("New Preferences Updated");
       } catch (error) {
         res.status(404).json("User not Found");
